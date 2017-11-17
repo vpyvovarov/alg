@@ -1,6 +1,4 @@
 import pytest
-from itertools import permutations
-from collections import defaultdict
 from union_find.quick_find import QuickFind
 from union_find.quick_union import QuickUnion
 from union_find.quick_union_waighted import QuickUnionWaighted
@@ -36,28 +34,30 @@ class BaseTests():
             error = "%s is not connected to %s"
             assert obj.connected(a, b), error % (a, b)
             assert obj.connected(b, a), error % (b, a)
-    
+
     def test_array_verification(self, obj):
         assert str(obj) == self.EXPECTED_STRUCTURE
 
+
 class TestQuickFind(BaseTests):
-    
-    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         0    1    2    2    2    0    0    0    8'
+
+    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         0    1    2    2    2    0    0    0    8' # noqa
 
     def get_instance(self, size=10):
         return QuickFind(size)
-    
+
 
 class TestQuickUnion(BaseTests):
-    
-    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         5    1    3    4    4    7    7    7    8'
+
+    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         5    1    3    4    4    7    7    7    8' # noqa
 
     def get_instance(self, size=10):
         return QuickUnion(size)
 
+
 class TestQuickUnionWaighted(BaseTests):
-    
-    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         0    1    2    2    2    0    0    6    8'
+
+    EXPECTED_STRUCTURE = '         0    1    2    3    4    5    6    7    8\n         0    1    2    2    2    0    0    6    8' # noqa
 
     def get_instance(self, size=10):
         return QuickUnionWaighted(size)
