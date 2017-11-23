@@ -15,6 +15,19 @@ def merge_sort(array):
         step_size += step_size
 
 
+def merge_sort_recursive(array):
+    sort(array, 0, len(array)-1)
+
+
+def sort(array, first, last):
+    if last <= first:
+        return
+    mid = first + (last-first) // 2
+    sort(array, first, mid)
+    sort(array, mid+1, last)
+    merge(array, first, mid, last)
+
+
 def merge(array, first, mid, last):
     aux = array.copy()
     i = first
