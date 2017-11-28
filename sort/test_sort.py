@@ -7,13 +7,15 @@ from sort.insertion_sort import insertion_sort
 from sort.shell_sort import shell_sort
 from sort.shuffle import shuffle
 from sort.merge_sort import merge_sort, merge_sort_recursive
+from sort.quick_sort import quick_sort
 
 
 @pytest.mark.parametrize("sorting_function",
                          (select_sort,
                           insertion_sort,
                           shell_sort, merge_sort,
-                          merge_sort_recursive))
+                          merge_sort_recursive,
+                          quick_sort))
 def test(sorting_function):
     arrays = list(combinations_with_replacement(range(10), 10))
     for array in arrays:
