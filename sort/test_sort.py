@@ -8,6 +8,7 @@ from sort.shell_sort import shell_sort
 from sort.shuffle import shuffle
 from sort.merge_sort import merge_sort, merge_sort_recursive
 from sort.quick_sort import quick_sort
+from sort.sort_3_way import sort_3_way
 
 
 @pytest.mark.parametrize("sorting_function",
@@ -15,7 +16,8 @@ from sort.quick_sort import quick_sort
                           insertion_sort,
                           shell_sort, merge_sort,
                           merge_sort_recursive,
-                          quick_sort))
+                          quick_sort,
+                          sort_3_way))
 def test(sorting_function):
     arrays = list(combinations_with_replacement(range(10), 10))
     for array in arrays:
