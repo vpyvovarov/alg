@@ -25,14 +25,14 @@ class BST():
         root.size = 1 + self.size(root.left) + self.size(root.right)
         return root
 
-    def min(self):
-        node = self.root
+    def min(self, node=None):
+        node = node or self.root
         while node.left is not None:
             node = node.left
         return node
 
-    def max(self):
-        node = self.root
+    def max(self, node=None):
+        node = node or self.root
         while node.right is not None:
             node = node.right
         return node
@@ -89,10 +89,43 @@ class BST():
             return 0
         return node.size
 
-    def show_graph(self):
+    def delete_min(self):
+        self.root = self._delete_min(self.root)
+
+    def _delete_min(self, node):
+        if node.left is None:
+            return node.right
+        node.left = self._delete_min(node.left)
+        node.size = 1 + self.size(node.left) + self.size(node.right)
+        return node
+
+    def delete(self, key):
+        self.root = self._delete(self.root, key)
+
+    def _delete(self, node, key):
+        if node is None:
+            return None
+        if node.key > key:
+            node.left = self._delete(node.left, key)
+        elif node.key < key:
+            node.right = self._delete(node.right, key)
+        else:
+            if node.right is None:
+                return node.left
+            if node.left is None:
+                return node.right
+
+            right_min_node = self.min(node.right)
+            node.right = self._delete_min(node.right)
+            node.key = right_min_node.key
+            node.value = right_min_node.value
+        node.size = 1 + self.size(node.left) + self.size(node.right)
+        return node
+
+    def show_graph(self, name="example1_graph.png"):
         graph = pydot.Dot(graph_type='digraph')
         self._show_graph(self.root, graph)
-        graph.write_png('example1_graph.png')
+        graph.write_png(name)
 
     def _make_node(self, node, graph):
         node_label_tmpl = "%s - %s - %s"
@@ -131,3 +164,14 @@ if __name__ == "__main__":
     print("floor 20 = %s" % a.floor(20).key)
     print("ceil 20 = %s" % a.ceil(20).key)
     print("in order : %s" % a.inorder())
+    node_to_delete = a.inorder()[3]
+    print("deleting node %s" % node_to_delete)
+    a.delete(node_to_delete)
+    print("in order : %s" % a.inorder())
+    a.delete_min()
+    print("min= %s" % a.min().key)
+    print("max= %s" % a.max().key)
+    print("floor 20 = %s" % a.floor(20).key)
+    print("ceil 20 = %s" % a.ceil(20).key)
+    print("in order : %s" % a.inorder())
+    a.show_graph("example2_graph.png")
