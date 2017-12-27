@@ -31,7 +31,11 @@ class Graph():
 
 
 class DFS():
-
+    """
+    Build DFS in time proportional to sum of degrees of all vertices
+    Find path in time proportional to length of the path
+    is_connected in constant time
+    """
     def __init__(self, graph, _from):
         self.marked = [False for _ in range(graph.num_of_vert())]
         self.edge_to = [None for _ in range(graph.num_of_vert())]
