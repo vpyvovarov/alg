@@ -20,6 +20,14 @@ class DiGraph(Graph):
                 graph.add_edge(edge)
         graph.write_png(name)
 
+    def reverse(self):
+        reversed_graph = DiGraph(self.num_of_vert())
+        for source, dest_list in enumerate(self.adj):
+            # import pdb; pdb.set_trace()
+            for dest in dest_list:
+                reversed_graph.add_edge(dest, source)
+        return reversed_graph
+
 
 if __name__ == "__main__":
     graph_data = [(0, 1),
@@ -41,3 +49,5 @@ if __name__ == "__main__":
         a.add_edge(edge[0], edge[1])
 
     a.show_graph()
+    b = a.reverse()
+    b.show_graph(name="reversed_digraph.png")
