@@ -54,6 +54,19 @@ class Heap():
         return len(self._nodes) - 1
 
 
+class MutableHeap(Heap):
+
+    def contains(self, key):
+        return key in self._nodes
+
+    def change(self, key, new_value):
+        index = self._nodes.index(key)
+        if index:
+            self._nodes[index] = new_value
+            self.swim(index)
+            self.sink(index)
+
+
 class MaxHeap(Heap):
 
     def compare(self, a, b):
